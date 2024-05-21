@@ -65,6 +65,8 @@ export class FastmailForwarder extends ForwarderGeneratorStrategy<ApiOptions & E
       throw error;
     }
 
+    const forDomain = (options.website || "");
+
     const body = JSON.stringify({
       using: ["https://www.fastmail.com/dev/maskedemail", "urn:ietf:params:jmap:core"],
       methodCalls: [
@@ -76,7 +78,7 @@ export class FastmailForwarder extends ForwarderGeneratorStrategy<ApiOptions & E
               "new-masked-email": {
                 state: "enabled",
                 description: "",
-                forDomain: options.website,
+                forDomain: forDomain,
                 emailPrefix: options.prefix,
               },
             },
